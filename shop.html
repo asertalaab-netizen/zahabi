@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZAHABI — Shop Premium Streetwear</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkbg: '#070707',
+                        gold: {
+                            DEFAULT: '#dfc28e',
+                            light: '#f7e7ce',
+                            dark: '#c5a059'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            min-height: 100vh;
+            background-color: #070707;
+            background-image: url('back.jpeg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+            color: #e5e7eb;
+            font-family: 'Inter', sans-serif;
+            -webkit-text-size-adjust: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .zahabi-logo-text {
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.15em;
+            color: #dfc28e;
+        }
+        .zahabi-nav-links {
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 0.1em;
+        }
+        .zahabi-heading {
+            font-family: 'Cinzel', serif;
+            background: linear-gradient(135deg, #dfc28e 0%, #c5a059 50%, #9a7b42 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 0.08em;
+        }
+        .zahabi-subheading {
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 0.25em;
+            color: #9ca3af;
+        }
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 0.2em;
+            color: #dfc28e;
+            font-weight: 500;
+            font-size: 0.75rem;
+        }
+
+        .zahabi-logo-img {
+            height: 24px;
+            width: auto;
+            object-fit: contain;
+            scale: calc(1.3);
+            position: relative;
+            top: -1px;
+        }
+        @media (min-width: 640px) {
+            .zahabi-logo-img {
+                height: 32px;
+                scale: calc(1.5);
+            }
+        }
+        @media (min-width: 1024px) {
+            .zahabi-logo-img {
+                height: 36px;
+                scale: calc(1.7);
+            }
+        }
+
+        input[type="radio"], input[type="checkbox"] {
+            accent-color: #dfc28e;
+        }
+
+        input[type="range"] {
+            accent-color: #dfc28e;
+        }
+
+        .zahabi-cart-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            width: 100%;
+            padding: 0.85rem;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(223, 194, 142, 0.4);
+            color: #dfc28e;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .zahabi-cart-btn:hover {
+            border-color: #dfc28e;
+            background: #dfc28e;
+            color: #000000;
+        }
+
+        .size-btn {
+            border: 1px solid rgba(223, 194, 142, 0.25);
+            color: #dfc28e;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            padding: 0.35rem 0.85rem;
+            background: transparent;
+            transition: all 0.2s ease;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+        }
+        .size-btn:hover, .size-btn.active {
+            border-color: #dfc28e;
+            background: #dfc28e;
+            color: #000000;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP NAVIGATION BAR -->
+    <header class="w-full flex items-center justify-between px-4 sm:px-8 lg:px-16 py-4 border-b border-[#dfc28e]/10 fixed top-0 left-0 z-50 bg-[#070707]/95 backdrop-blur-md">
+        
+        <a href="index.html" class="flex items-center space-x-2 sm:space-x-3 group">
+            <img class="zahabi-logo-img" src="logo.png" alt="Zahabi Logo">
+            <span class="zahabi-logo-text text-xs sm:text-lg md:text-xl font-semibold">ZAHABI</span>
+        </a>
+
+        <nav class="zahabi-nav-links hidden md:flex items-center space-x-6 lg:space-x-12 text-xs sm:text-sm font-light">
+            <a href="index.html" class="text-[#dfc28e]/60 hover:text-[#dfc28e] transition-colors">HOME</a>
+            <a href="shop.html" class="relative py-1 text-[#dfc28e] after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-[#dfc28e]">SHOP</a>
+            <a href="about.html" class="text-[#dfc28e]/60 hover:text-[#dfc28e] transition-colors">ABOUT</a>
+            <a href="contact.html" class="text-[#dfc28e]/60 hover:text-[#dfc28e] transition-colors">CONTACT</a>
+
+            <a href="#cart" class="text-[#dfc28e] hover:text-amber-100 transition-colors pl-2">
+                <i class="fa-solid fa-cart-shopping text-base"></i>
+            </a>
+        </nav>
+
+        <div class="flex items-center space-x-3 md:hidden text-[#dfc28e]">
+            <a href="#cart" class="text-base"><i class="fa-solid fa-cart-shopping"></i></a>
+            <button id="mobile-filter-toggle" class="border border-[#dfc28e]/30 p-1.5 text-xs text-[#dfc28e] flex items-center gap-1" title="Filters">
+                <i class="fa-solid fa-filter"></i>
+            </button>
+            <button id="menu-btn" class="text-xl focus:outline-none p-1" title="Menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- MOBILE DROPDOWN MENU -->
+    <div id="mobile-menu" class="fixed inset-x-0 top-[65px] bg-[#070707]/98 border-b border-[#dfc28e]/20 backdrop-blur-xl z-40 hidden flex-col px-6 py-6 space-y-4 md:hidden shadow-2xl">
+        <a href="index.html" class="zahabi-nav-links text-sm text-[#dfc28e]/70 hover:text-[#dfc28e] transition-colors py-2 border-b border-white/5">HOME</a>
+        <a href="shop.html" class="zahabi-nav-links text-sm text-[#dfc28e] font-normal py-2 border-b border-white/5">SHOP</a>
+        <a href="about.html" class="zahabi-nav-links text-sm text-[#dfc28e]/70 hover:text-[#dfc28e] transition-colors py-2 border-b border-white/5">ABOUT</a>
+        <a href="contact.html" class="zahabi-nav-links text-sm text-[#dfc28e]/70 hover:text-[#dfc28e] transition-colors py-2 border-b border-white/5">CONTACT</a>
+    </div>
+
+    <!-- MAIN SHOP CONTAINER -->
+    <main class="w-full px-4 sm:px-12 py-8 sm:py-14 flex-grow pt-28">
+        
+        <div class="mb-8 sm:mb-12 text-center sm:text-left max-w-[1600px] mx-auto">
+            <div class="zahabi-subheading text-[10px] sm:text-[11px] uppercase tracking-[0.35em] mb-2 sm:mb-3">
+                Zahabi
+            </div>
+            <h1 class="zahabi-heading text-3xl sm:text-6xl font-bold tracking-[0.1em] mb-2 sm:mb-3">
+                SHOP
+            </h1>
+            <p class="zahabi-subheading text-[10px] sm:text-xs tracking-[0.25em] sm:tracking-[0.3em] uppercase">
+                PREMIUM STREETWEAR. LIMITED QUANTITY.
+            </p>
+        </div>
+
+        <div class="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-10">
+            
+            <!-- LEFT SIDEBAR: FILTERS -->
+            <aside id="filter-sidebar" class="hidden lg:block lg:col-span-1 space-y-8 pr-0 lg:pr-6 border-b lg:border-b-0 lg:border-r border-[#dfc28e]/10 pb-8 lg:pb-0 bg-[#070707]/95 lg:bg-[#070707]/30 p-5 lg:p-4 rounded-md backdrop-blur-sm">
+                
+                <div class="flex justify-between items-center lg:hidden pb-4 border-b border-[#dfc28e]/20">
+                    <span class="zahabi-nav-links text-xs text-[#dfc28e] tracking-widest font-bold">FILTERS</span>
+                    <button id="close-filter" class="text-[#dfc28e] text-sm"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+
+                <div>
+                    <h3 class="section-title mb-4 uppercase">CATEGORIES</h3>
+                    <div class="space-y-3 text-xs font-light text-gray-300 font-['Montserrat'] tracking-wider">
+                        <label class="flex items-center space-x-3 cursor-pointer">
+                            <input type="radio" name="category" value="all" checked class="w-3.5 h-3.5 text-gold bg-transparent border-gray-600 filter-input">
+                            <span>All</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer">
+                            <input type="radio" name="category" value="sweatpants" class="w-3.5 h-3.5 text-gold bg-transparent border-gray-600 filter-input">
+                            <span>Sweatpants</span>
+                        </label>
+                            <label class="flex items-center space-x-3 cursor-pointer">
+                            <input type="radio" name="category" value="sweatpants" class="w-3.5 h-3.5 text-gold bg-transparent border-gray-600 filter-input">
+                            <span>coming soon</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="section-title mb-4 uppercase">COLORS</h3>
+                    <div class="space-y-3 text-xs font-light text-gray-300 font-['Montserrat'] tracking-wider">
+                        <label class="flex items-center space-x-3 cursor-pointer">
+                            <input type="checkbox" value="gray" checked class="w-3.5 h-3.5 rounded bg-transparent border-gray-600 filter-input color-checkbox">
+                            <span>Gray</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer">
+                            <input type="checkbox" value="black" checked class="w-3.5 h-3.5 rounded bg-transparent border-gray-600 filter-input color-checkbox">
+                            <span>Black</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="section-title mb-4 uppercase">SIZES</h3>
+                    <div class="flex gap-2 flex-wrap" id="sidebar-sizes">
+                        <button type="button" data-size="M" class="size-btn filter-size">M</button>
+                        <button type="button" data-size="L" class="size-btn filter-size">L</button>
+                        <button type="button" data-size="XL" class="size-btn filter-size">XL</button>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="section-title mb-4 uppercase">PRICE</h3>
+                    <div class="space-y-3">
+                        <input type="range" id="price-range" min="0" max="850" value="850" class="w-full bg-gray-700 h-1 rounded-none appearance-none cursor-pointer">
+                        <div class="flex justify-between text-[10px] text-gray-400 font-mono tracking-widest">
+                            <span>0 EGP</span>
+                            <span id="price-output">850 EGP</span>
+                        </div>
+                    </div>
+                </div>
+
+            </aside>
+
+            <!-- RIGHT CATALOG: PRODUCTS -->
+            <div class="lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-start" id="product-grid">
+                
+                <!-- Product Card 1 -->
+                <div class="product-card border border-[#dfc28e]/20 bg-[#070707]/80 backdrop-blur-sm flex flex-col justify-between group h-full" 
+                     data-category="sweatpants" data-color="black" data-price="800" data-sizes="M,L,XL">
+                    <div>
+                        <div class="relative w-full h-72 sm:h-80 bg-[#070707]/80 flex items-center justify-center border-b border-[#dfc28e]/10 overflow-hidden">
+                            <span class="absolute top-4 left-4 text-[9px] tracking-[0.25em] uppercase font-['Montserrat'] px-2.5 py-1 border border-[#dfc28e]/40 text-[#dfc28e] bg-black/50 z-10">NEW</span>
+                            <img src="pant (1).png" alt="Zahabi Sweatpant Black" class="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="p-5 sm:p-6">
+                            <h4 class="zahabi-subheading text-[10px] tracking-[0.25em] mb-2 uppercase">ZAHABI SWEATPANT (BLACK)</h4>
+                            <div class="text-[#dfc28e] font-serif text-base tracking-wider font-semibold mb-4 sm:mb-5">800 EGP</div>
+                            <div class="flex gap-2 mb-2 card-sizes">
+                                <button type="button" class="size-btn" data-size="M">M</button>
+                                <button type="button" class="size-btn active" data-size="L">L</button>
+                                <button type="button" class="size-btn" data-size="XL">XL</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-5 sm:p-6 pt-0">
+                        <button class="zahabi-cart-btn">
+                            <i class="fa-solid fa-cart-shopping text-xs"></i>
+                            <span>ADD TO CART</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product Card 2 -->
+                <div class="product-card border border-[#dfc28e]/20 bg-[#070707]/80 backdrop-blur-sm flex flex-col justify-between group h-full" 
+                     data-category="sweatpants" data-color="gray" data-price="800" data-sizes="M,L">
+                    <div>
+                        <div class="relative w-full h-72 sm:h-80 bg-[#070707]/80 flex items-center justify-center border-b border-[#dfc28e]/10 overflow-hidden">
+                            <span class="absolute top-4 left-4 text-[9px] tracking-[0.25em] uppercase font-['Montserrat'] px-2.5 py-1 border border-[#dfc28e]/40 text-[#dfc28e] bg-black/50 z-10">NEW</span>
+                            <img src="pant (2).png" alt="Zahabi Sweatpant Gray" class="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="p-5 sm:p-6">
+                            <h4 class="zahabi-subheading text-[10px] tracking-[0.25em] mb-2 uppercase">ZAHABI SWEATPANT (GRAY)</h4>
+                            <div class="text-[#dfc28e] font-serif text-base tracking-wider font-semibold mb-4 sm:mb-5">800 EGP</div>
+                            <div class="flex gap-2 mb-2 card-sizes">
+                                <button type="button" class="size-btn" data-size="M">M</button>
+                                <button type="button" class="size-btn active" data-size="L">L</button>
+                                  <button type="button" class="size-btn" data-size="XL">XL</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-5 sm:p-6 pt-0">
+                        <button class="zahabi-cart-btn">
+                            <i class="fa-solid fa-cart-shopping text-xs"></i>
+                            <span>ADD TO CART</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product Card 3 -->
+                <div class="product-card border border-[#dfc28e]/20 bg-[#070707]/80 backdrop-blur-sm flex flex-col justify-between group h-full" 
+                     data-category="sweatpants" data-color="black" data-price="750" data-sizes="M,L,XL">
+                    <div>
+                        <div class="relative w-full h-72 sm:h-80 bg-[#070707]/80 flex items-center justify-center border-b border-[#dfc28e]/10 overflow-hidden">
+                            <span class="absolute top-4 left-4 text-[9px] tracking-[0.25em] uppercase font-['Montserrat'] px-2.5 py-1 border border-[#dfc28e]/40 text-[#dfc28e] bg-black/50 z-10">NEW</span>
+                            <img src="pant (3).png" alt="Zahabi Signature Sweatpant Black" class="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="p-5 sm:p-6">
+                            <h4 class="zahabi-subheading text-[10px] tracking-[0.25em] mb-2 uppercase">ZAHABI SWEATPANT (FULL BLACK)</h4>
+                            <div class="text-[#dfc28e] font-serif text-base tracking-wider font-semibold mb-4 sm:mb-5">750 EGP</div>
+                            <div class="flex gap-2 mb-2 card-sizes">
+                                <button type="button" class="size-btn" data-size="M">M</button>
+                                <button type="button" class="size-btn active" data-size="L">L</button>
+                                <button type="button" class="size-btn" data-size="XL">XL</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-5 sm:p-6 pt-0">
+                        <button class="zahabi-cart-btn">
+                            <i class="fa-solid fa-cart-shopping text-xs"></i>
+                            <span>ADD TO CART</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full border-t border-[#dfc28e]/20 bg-[#070707]/95 backdrop-blur-md py-8 mt-auto">
+        <div class="w-full px-6 sm:px-16 grid grid-cols-2 md:grid-cols-4 gap-6 text-center md:text-left">
+            <div class="flex flex-col md:flex-row items-center justify-center md:justify-start gap-3">
+                <i class="fa-solid fa-gem text-[#dfc28e] text-lg"></i>
+                <div class="zahabi-subheading text-[10px] font-medium text-[#dfc28e] uppercase tracking-[0.2em]">PREMIUM QUALITY</div>
+            </div>
+            <div class="flex flex-col md:flex-row items-center justify-center md:justify-start gap-3">
+                <i class="fa-solid fa-hourglass-half text-[#dfc28e] text-lg"></i>
+                <div class="zahabi-subheading text-[10px] font-medium text-[#dfc28e] uppercase tracking-[0.2em]">LIMITED QUANTITY</div>
+            </div>
+            <div class="flex flex-col md:flex-row items-center justify-center md:justify-start gap-3">
+                <i class="fa-solid fa-truck-fast text-[#dfc28e] text-lg"></i>
+                <div class="zahabi-subheading text-[10px] font-medium text-[#dfc28e] uppercase tracking-[0.2em]">FAST DELIVERY</div>
+            </div>
+            <div class="flex flex-col md:flex-row items-center justify-center md:justify-start gap-3">
+                <i class="fa-solid fa-shield-halved text-[#dfc28e] text-lg"></i>
+                <div class="zahabi-subheading text-[10px] font-medium text-[#dfc28e] uppercase tracking-[0.2em]">SECURE PAYMENT</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- CART SIDEBAR / DRAWER MODAL -->
+    <div id="cart-drawer" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex justify-end transition-opacity duration-300">
+        <div class="w-full max-w-md bg-[#070707] border-l border-[#dfc28e]/20 h-full flex flex-col justify-between p-6 shadow-2xl overflow-y-auto">
+            
+            <div>
+                <!-- Cart Header -->
+                <div class="flex justify-between items-center border-b border-[#dfc28e]/20 pb-4 mb-4">
+                    <h3 class="zahabi-logo-text text-sm sm:text-base text-[#dfc28e] tracking-widest font-bold">YOUR SHOPPING CART</h3>
+                    <button id="close-cart" class="text-[#dfc28e] text-xl hover:text-white transition-colors">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <!-- Cart Items Container -->
+                <div id="cart-items-container" class="space-y-4 mb-6">
+                    <!-- يتم تعبئتها تلقائياً -->
+                </div>
+
+                <!-- SHIPPING ADDRESS FORM -->
+                <div class="border-t border-[#dfc28e]/20 pt-4 mb-4 space-y-3">
+                    <h4 class="text-xs text-[#dfc28e] font-['Montserrat'] tracking-widest font-bold uppercase mb-2">بيانات الشحن والعنوان</h4>
+                    
+                    <div class="grid grid-cols-2 gap-2">
+                        <input type="text" id="cust-name" placeholder="الاسم الكامل" class="w-full bg-black/50 border border-[#dfc28e]/30 text-xs text-gray-200 p-2.5 focus:border-[#dfc28e] outline-none font-['Montserrat']">
+                        <input type="tel" id="cust-phone" placeholder="رقم الهاتف" class="w-full bg-black/50 border border-[#dfc28e]/30 text-xs text-gray-200 p-2.5 focus:border-[#dfc28e] outline-none font-['Montserrat']">
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2">
+                        <input type="text" id="cust-gov" placeholder="المحافظة" class="w-full bg-black/50 border border-[#dfc28e]/30 text-xs text-gray-200 p-2.5 focus:border-[#dfc28e] outline-none font-['Montserrat']">
+                        <input type="text" id="cust-city" placeholder="المدينة / المركز" class="w-full bg-black/50 border border-[#dfc28e]/30 text-xs text-gray-200 p-2.5 focus:border-[#dfc28e] outline-none font-['Montserrat']">
+                    </div>
+
+                    <input type="text" id="cust-street" placeholder="اسم الشارع" class="w-full bg-black/50 border border-[#dfc28e]/30 text-xs text-gray-200 p-2.5 focus:border-[#dfc28e] outline-none font-['Montserrat']">
+
+                    <div class="grid grid-cols-2 gap-2">
+                        <input type="text" id="cust-house" placeholder="رقم البيت / العمارة" class="w-full bg-black/50 border border-[#dfc28e]/30 text-xs text-gray-200 p-2.5 focus:border-[#dfc28e] outline-none font-['Montserrat']">
+                        <input type="text" id="cust-floor" placeholder="رقم الدور / الشقة" class="w-full bg-black/50 border border-[#dfc28e]/30 text-xs text-gray-200 p-2.5 focus:border-[#dfc28e] outline-none font-['Montserrat']">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cart Footer & WhatsApp Checkout -->
+            <div class="border-t border-[#dfc28e]/20 pt-4 space-y-4">
+                <div class="flex justify-between items-center text-sm font-['Montserrat'] tracking-wider">
+                    <span class="text-gray-400">TOTAL:</span>
+                    <span id="cart-total-price" class="text-[#dfc28e] font-serif font-bold text-base">0 EGP</span>
+                </div>
+                
+                <button onclick="checkoutWhatsApp()" class="w-full py-3.5 bg-[#dfc28e] hover:bg-[#c5a059] text-black font-['Montserrat'] text-xs font-bold uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-2 cursor-pointer">
+                    <i class="fa-brands fa-whatsapp text-base"></i>
+                    <span>ORDER VIA WHATSAPP</span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileToggle = document.getElementById('mobile-filter-toggle');
+            const closeFilter = document.getElementById('close-filter');
+            const filterSidebar = document.getElementById('filter-sidebar');
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            menuBtn.addEventListener('click', () => {
+                if (mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.remove('hidden');
+                    mobileMenu.classList.add('flex');
+                    menuBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+                } else {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.classList.remove('flex');
+                    menuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+                }
+            });
+
+            if (mobileToggle) {
+                mobileToggle.addEventListener('click', () => {
+                    filterSidebar.classList.toggle('hidden');
+                    if(!filterSidebar.classList.contains('hidden')) {
+                        filterSidebar.className = "fixed inset-x-0 top-20 z-50 max-h-[80vh] overflow-y-auto space-y-8 bg-[#070707] p-6 border-b border-[#dfc28e]/30 shadow-2xl block lg:block lg:static lg:bg-transparent lg:p-0 lg:border-none lg:shadow-none lg:col-span-1";
+                    }
+                });
+            }
+
+            if(closeFilter) {
+                closeFilter.addEventListener('click', () => {
+                    filterSidebar.classList.add('hidden');
+                });
+            }
+
+            const cartIconLinks = document.querySelectorAll('a[href="#cart"], .fa-cart-shopping');
+            const cartDrawer = document.getElementById('cart-drawer');
+            const closeCartBtn = document.getElementById('close-cart');
+
+            cartIconLinks.forEach(link => {
+                if(link.innerHTML.includes('fa-cart-shopping') || link.getAttribute('href') === '#cart') {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        openCartDrawer();
+                    });
+                }
+            });
+
+            if(closeCartBtn) {
+                closeCartBtn.addEventListener('click', () => {
+                    cartDrawer.classList.add('hidden');
+                });
+            }
+
+            cartDrawer.addEventListener('click', (e) => {
+                if (e.target === cartDrawer) {
+                    cartDrawer.classList.add('hidden');
+                }
+            });
+
+            // تفاعل أزرار اختيار المقاسات داخل بطاقات المنتجات
+            document.addEventListener('click', (e) => {
+                if (e.target.closest('.card-sizes .size-btn')) {
+                    const btn = e.target.closest('.size-btn');
+                    const container = btn.closest('.card-sizes');
+                    container.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                }
+                // تفاعل أزرار الفلترة بالمقاس في السايدبار
+                if (e.target.closest('#sidebar-sizes .size-btn')) {
+                    const btn = e.target.closest('.size-btn');
+                    btn.classList.toggle('active');
+                    filterProducts();
+                }
+            });
+
+            // تفعيل نظام الفلترة التلقائي عند تغيير أي خيار
+            const filterInputs = document.querySelectorAll('.filter-input');
+            filterInputs.forEach(input => {
+                input.addEventListener('change', filterProducts);
+            });
+
+            const priceRange = document.getElementById('price-range');
+            const priceOutput = document.getElementById('price-output');
+            priceRange.addEventListener('input', () => {
+                priceOutput.textContent = priceRange.value + ' EGP';
+                filterProducts();
+            });
+
+            // أزرار إضافة إلى السلة
+            const cartButtons = document.querySelectorAll('.zahabi-cart-btn');
+            cartButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const card = btn.closest('.product-card');
+                    if(!card) return;
+                    
+                    const title = card.querySelector('.zahabi-subheading').textContent;
+                    const price = card.querySelector('.text-\\[\\#dfc28e\\].font-serif, div.text-\\[\\#dfc28e\\]').textContent;
+                    const image = card.querySelector('img').getAttribute('src');
+                    const activeSizeBtn = card.querySelector('.card-sizes .size-btn.active');
+                    const size = activeSizeBtn ? activeSizeBtn.getAttribute('data-size') : 'L';
+
+                    const product = { title, price: price.trim(), size, image };
+
+                    let cart = JSON.parse(localStorage.getItem('zahabi_cart')) || [];
+                    cart.push(product);
+                    localStorage.setItem('zahabi_cart', JSON.stringify(cart));
+
+                    const originalText = btn.innerHTML;
+                    btn.innerHTML = '<i class="fa-solid fa-check text-xs"></i> <span>ADDED</span>';
+                    setTimeout(() => { btn.innerHTML = originalText; }, 1500);
+
+                    renderCartItems();
+                });
+            });
+        });
+
+        // دالة الفلترة الشاملة
+        function filterProducts() {
+            // 1. الفئة المحددة
+            const selectedCategory = document.querySelector('input[name="category"]:checked')?.value || 'all';
+
+            // 2. الألوان المحددة
+            const selectedColors = Array.from(document.querySelectorAll('.color-checkbox:checked')).map(cb => cb.value);
+
+            // 3. المقاسات المحددة في الفلتر الجانبي
+            const selectedSizes = Array.from(document.querySelectorAll('#sidebar-sizes .size-btn.active')).map(btn => btn.getAttribute('data-size'));
+
+            // 4. الحد الأقصى للسعر
+            const maxPrice = parseInt(document.getElementById('price-range').value) || 850;
+
+            // جلب جميع بطاقات المنتجات
+            const productCards = document.querySelectorAll('.product-card');
+
+            productCards.forEach(card => {
+                const category = card.getAttribute('data-category');
+                const color = card.getAttribute('data-color');
+                const price = parseInt(card.getAttribute('data-price')) || 0;
+                const cardSizes = card.getAttribute('data-sizes').split(','); // مثل ["M", "L", "XL"]
+
+                let matchesCategory = (selectedCategory === 'all' || category === selectedCategory);
+                let matchesColor = (selectedColors.length === 0 || selectedColors.includes(color));
+                let matchesPrice = (price <= maxPrice);
+
+                // فحص المقاسات (إذا تم تحديد مقاسات في الفلتر الجانبي، يجب أن يحتوي المنتج على أحدها)
+                let matchesSize = true;
+                if (selectedSizes.length > 0) {
+                    matchesSize = cardSizes.some(size => selectedSizes.includes(size));
+                }
+
+                if (matchesCategory && matchesColor && matchesPrice && matchesSize) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function renderCartItems() {
+            const container = document.getElementById('cart-items-container');
+            const totalPriceEl = document.getElementById('cart-total-price');
+            let cart = JSON.parse(localStorage.getItem('zahabi_cart')) || [];
+
+            container.innerHTML = '';
+            let total = 0;
+
+            if (cart.length === 0) {
+                container.innerHTML = '<p class="text-gray-400 text-xs text-center font-[\'Montserrat\'] tracking-widest py-6">YOUR CART IS EMPTY</p>';
+                totalPriceEl.textContent = '0 EGP';
+                return;
+            }
+
+            cart.forEach((item, index) => {
+                let numericPrice = parseInt(item.price.replace(/[^0-9]/g, '')) || 0;
+                total += numericPrice;
+
+                const itemEl = document.createElement('div');
+                itemEl.className = 'flex items-center justify-between border-b border-white/5 pb-3 gap-3';
+                itemEl.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <img src="${item.image}" alt="${item.title}" class="w-10 h-12 object-contain bg-black/40 border border-[#dfc28e]/20 p-1">
+                        <div>
+                            <h4 class="text-[10px] text-[#dfc28e] tracking-widest font-['Montserrat'] font-semibold">${item.title}</h4>
+                            <p class="text-[9px] text-gray-400 tracking-wider">SIZE: ${item.size}</p>
+                            <p class="text-[10px] text-gray-200 font-serif mt-1">${item.price}</p>
+                        </div>
+                    </div>
+                    <button onclick="removeFromCart(${index})" class="text-red-400 hover:text-red-300 text-xs px-2 py-1 cursor-pointer">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                `;
+                container.appendChild(itemEl);
+            });
+
+            totalPriceEl.textContent = total + ' EGP';
+            document.getElementById('cart-drawer').classList.remove('hidden');
+        }
+
+        function openCartDrawer() {
+            renderCartItems();
+        }
+
+        function removeFromCart(index) {
+            let cart = JSON.parse(localStorage.getItem('zahabi_cart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('zahabi_cart', JSON.stringify(cart));
+            renderCartItems();
+        }
+
+        function checkoutWhatsApp() {
+            let cart = JSON.parse(localStorage.getItem('zahabi_cart')) || [];
+            if (cart.length === 0) {
+                alert('عربة التسوق فارغة!');
+                return;
+            }
+
+            let name = document.getElementById('cust-name').value.trim();
+            let phone = document.getElementById('cust-phone').value.trim();
+            let gov = document.getElementById('cust-gov').value.trim();
+            let city = document.getElementById('cust-city').value.trim();
+            let street = document.getElementById('cust-street').value.trim();
+            let house = document.getElementById('cust-house').value.trim();
+            let floor = document.getElementById('cust-floor').value.trim();
+
+            if (!name || !phone || !gov || !city || !street) {
+                alert('الرجاء إكمال بيانات الاسم، الهاتف، المحافظة، المدينة، واسم الشارع على الأقل!');
+                return;
+            }
+
+            let message = "السلام عليكم، أرغب في إتمام الطلب الآتي من متجر ZAHABI:\n\n";
+            message += `👤 * information:*\n`;
+            message += `- name: ${name}\n`;
+            message += `- phone: ${phone}\n\n`;
+
+            message += `📍 *address :*\n`;
+            message += `- governorate: ${gov}\n`;
+            message += `- city: ${city}\n`;
+            message += `- street: ${street}\n`;
+            if(house) message += `- house : ${house}\n`;
+            if(floor) message += `- الدور/الشقة: ${floor}\n\n`;
+
+            message += `🛍 *المنتجات المطلوبة:*\n`;
+            let totalPrice = 0;
+
+            cart.forEach((item, index) => {
+                message += `${index + 1}- ${item.title}\n`;
+                message += `   المقاس: ${item.size} | السعر: ${item.price}\n`;
+                
+                let numericPrice = parseInt(item.price.replace(/[^0-9]/g, '')) || 0;
+                totalPrice += numericPrice;
+            });
+
+            message += `\n*💰 الإجمالي الكلي: ${totalPrice} EGP*`;
+
+            let phoneNumber = "201098912117"; 
+            let encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
+        }
+    </script>
+</body>
+</html>
