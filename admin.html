@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZAHABI — Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { background-color: #070707; color: #e5e7eb; font-family: 'Montserrat', sans-serif; }
+        .zahabi-heading { font-family: 'Cinzel', serif; color: #dfc28e; }
+        input, select { background: rgba(0,0,0,0.6); border: 1px solid rgba(223,194,142,0.3); color: #fff; outline: none; }
+        input:focus, select:focus { border-color: #dfc28e; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between p-6">
+
+    <!-- شاشة تسجيل الدخول -->
+    <div id="login-section" class="max-w-md w-full mx-auto my-auto bg-black/80 border border-[#dfc28e]/30 p-8 rounded shadow-2xl">
+        <h2 class="zahabi-heading text-2xl font-bold text-center mb-6 tracking-widest">ADMIN LOGIN</h2>
+        <div class="space-y-4">
+            <input type="email" id="admin-email" placeholder="Admin Email" class="w-full p-3 text-sm">
+            <input type="password" id="admin-pass" placeholder="Password" class="w-full p-3 text-sm">
+            <button onclick="loginAdmin()" class="w-full py-3 bg-[#dfc28e] text-black font-bold tracking-widest text-xs uppercase hover:bg-[#c5a059] transition-all cursor-pointer">LOGIN</button>
+            <p id="login-error" class="text-red-400 text-xs text-center hidden">بيانات الدخول غير صحيحة!</p>
+        </div>
+    </div>
+
+    <!-- لوحة التحكم -->
+    <div id="dashboard-section" class="max-w-4xl w-full mx-auto hidden space-y-8 pt-10">
+        <div class="flex justify-between items-center border-b border-[#dfc28e]/20 pb-4">
+            <h1 class="zahabi-heading text-2xl tracking-widest">ZAHABI ADMIN DASHBOARD</h1>
+            <button onclick="logoutAdmin()" class="text-xs text-red-400 hover:text-red-300 tracking-wider cursor-pointer"><i class="fa-solid fa-right-from-bracket"></i> LOGOUT</button>
+        </div>
+
+        <!-- إضافة منتج جديد -->
+        <div class="bg-black/60 border border-[#dfc28e]/20 p-6 rounded">
+            <h3 class="text-sm text-[#dfc28e] tracking-widest font-bold uppercase mb-4">إضافة منتج جديد للمتجر</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <input type="text" id="p-title" placeholder="اسم المنتج (مثال: ZAHABI SWEATPANT)" class="p-3 text-xs">
+                <input type="text" id="p-price" placeholder="السعر (مثال: 800 EGP)" class="p-3 text-xs">
+                <input type="text" id="p-category" placeholder="الفئة (مثال: sweatpants)" class="p-3 text-xs">
+                <input type="text" id="p-image" placeholder="اسم ملف الصورة (مثال: pant (1).png)" class="p-3 text-xs">
+                <input type="text" id="p-sizes" placeholder="المقاسات مفصولة بفاصلة (مثال: M,L,XL)" class="p-3 text-xs sm:col-span-2">
+            </div>
+            <button onclick="addProduct()" class="mt-4 w-full py-3 bg-[#dfc28e] text-black font-bold tracking-widest text-xs uppercase hover:bg-[#c5a059] transition-all cursor-pointer">إضافة المنتج الآن</button>
+        </div>
+
+        <!-- قائمة المنتجات الحالية -->
+        <div class="bg-black/60 border border-[#dfc28e]/20 p-6 rounded">
+            <h3 class="text-sm text-[#dfc28e] tracking-widest font-bold uppercase mb-4">المنتجات الحالية</h3>
+            <div id="admin-products-list" class="space-y-3">
+                <!-- يتم جلب المنتجات هنا -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const ADMIN_EMAIL = "admin@zahabi.com";
+        const ADMIN_PASS = "zahabi123";
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('zahabi_logged_in') === 'true') {
+                showDashboard();
+            }
+        });
+
+        function loginAdmin() {
+            const email = document.getElementById('admin-email').value.trim();
+            const pass = document.getElementById('admin-pass').value.trim();
+
+            if (email === ADMIN_EMAIL && pass === ADMIN_PASS) {
+                localStorage.setItem('zahabi_logged_in', 'true');
+                showDashboard();
+            } else {
+                document.getElementById('login-error').classList.remove('hidden');
+            }
+        }
+
+        function logoutAdmin() {
+            localStorage.removeItem('zahabi_logged_in');
+            document.getElementById('dashboard-section').classList.add('hidden');
+            document.getElementById('login-section').classList.remove('hidden');
+        }
+
+        function showDashboard() {
+            document.getElementById('login-section').classList.add('hidden');
+            document.getElementById('dashboard-section').classList.remove('hidden');
+            fetchAdminProducts();
+        }
+
+        function addProduct() {
+            const title = document.getElementById('p-title').value.trim();
+            const price = document.getElementById('p-price').value.trim();
+            const category = document.getElementById('p-category').value.trim() || 'sweatpants';
+            const image = document.getElementById('p-image').value.trim() || 'pant (1).png';
+            const sizes = document.getElementById('p-sizes').value.trim() || 'M,L,XL';
+
+            if (!title || !price) {
+                alert('الرجاء إدخال اسم المنتج والسعر على الأقل!');
+                return;
+            }
+
+            let products = JSON.parse(localStorage.getItem('zahabi_products')) || [];
+            const newProduct = {
+                id: Date.now(),
+                title,
+                price,
+                category,
+                image,
+                sizes
+            };
+
+            products.push(newProduct);
+            localStorage.setItem('zahabi_products', JSON.stringify(products));
+
+            alert('تم إضافة المنتج بنجاح وتحديث المتجر!');
+            document.getElementById('p-title').value = '';
+            document.getElementById('p-price').value = '';
+            document.getElementById('p-category').value = '';
+            document.getElementById('p-image').value = '';
+            document.getElementById('p-sizes').value = '';
+            fetchAdminProducts();
+        }
+
+        function fetchAdminProducts() {
+            const container = document.getElementById('admin-products-list');
+            let products = JSON.parse(localStorage.getItem('zahabi_products')) || [];
+
+            if (products.length === 0) {
+                container.innerHTML = '<p class="text-xs text-gray-400">لا توجد منتجات مسجلة حتى الآن. أضف منتجك الأول بالأعلى!</p>';
+                return;
+            }
+
+            container.innerHTML = '';
+            products.forEach(product => {
+                const row = document.createElement('div');
+                row.className = 'flex items-center justify-between border-b border-white/5 pb-2 text-xs';
+                row.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <img src="${product.image}" class="w-8 h-8 object-contain bg-black/40 border border-[#dfc28e]/20 p-1">
+                        <div>
+                            <span class="text-[#dfc28e] font-semibold">${product.title}</span>
+                            <span class="text-gray-400 ml-2">(${product.price})</span>
+                        </div>
+                    </div>
+                    <button onclick="deleteProduct(${product.id})" class="text-red-400 hover:text-red-300 p-1 cursor-pointer"><i class="fa-solid fa-trash-can"></i> حذف</button>
+                `;
+                container.appendChild(row);
+            });
+        }
+
+        function deleteProduct(id) {
+            if(!confirm('هل أنت متأكد من حذف هذا المنتج؟')) return;
+
+            let products = JSON.parse(localStorage.getItem('zahabi_products')) || [];
+            products = products.filter(p => p.id !== id);
+            localStorage.setItem('zahabi_products', JSON.stringify(products));
+            fetchAdminProducts();
+        }
+    </script>
+</body>
+</html>
